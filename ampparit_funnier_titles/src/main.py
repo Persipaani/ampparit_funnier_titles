@@ -1,6 +1,8 @@
 '''
 Created on 9.10.2015
 
+Versio 0.2
+
 @author: Sampo
 '''
 import urllib.request
@@ -19,6 +21,7 @@ class FunnierTitles(object):
         self.begins = []
         self.ends = []
         self.get_data_from_url()
+        #self.altparse("Lehti: Sampo söi ison pulla-kalan – Ei mahtunut edes suusta alas!")
         
     
     def get_data_from_url(self):
@@ -43,6 +46,27 @@ class FunnierTitles(object):
             print("10 retries and no result, You are out of luck buddy...")
             return
     
+    def altparse(self,full_title):
+        '''
+        Parses title alterantive way and puts it in containers
+        '''
+        while(full_title.count(" - ") != 0 or full_title.count(":")!=0 or full_title.count("–")!=0):
+            
+            if(full_title.count(" - ") != 0):
+                first = full_title[:full_title.index(" - ")]
+                full_title = full_title[full_title.index("-")+1:]
+            elif(full_title.count(":") != 0):
+                first = full_title[:full_title.index(":")]
+                full_title = full_title[full_title.index(":")+1:]
+            elif(full_title.count("–") != 0):
+                first = full_title[:full_title.index("–")]
+                full_title = full_title[full_title.index("–")+1:]
+            
+            self.begins.append(first.strip())
+            
+        self.ends.append(full_title.strip())      
+    
+    
     def read_html_file(self,file):
         '''
         Reads html and puts data in container for usage
@@ -59,10 +83,18 @@ class FunnierTitles(object):
                             #print(word[word.index('_blank">') + 8 : word.index("</a")])
                             full_title = word[word.index('_blank">')+8:word.index("</a")]
                             #print(full_title)
+                            
+                            self.altparse(full_title)
+                            
+                            '''
                             #Division by –
                             if(full_title.count("–") == 1):
                                 self.begins.append(full_title[:full_title.index("–")])
                                 self.ends.append(full_title[full_title.index("–")+1:])
+                            #Division by small -
+                            elif(full_title.count(" - ") == 1):
+                                self.begins.append(full_title[:full_title.index(" - ")])
+                                self.ends.append(full_title[full_title.index(" - ")+1:])
                             #Division by two -'s
                             elif(full_title.count("–") == 2):
                                 self.begins.append(full_title[:full_title.index("–")])
@@ -73,6 +105,7 @@ class FunnierTitles(object):
                             elif(full_title.count(":") != 0):
                                 self.begins.append(full_title[:full_title.index(":")])
                                 self.ends.append(full_title[full_title.index(":")+1:])
+                            '''
                                 
         except Exception as error:
             print(error)
@@ -89,7 +122,7 @@ class FunnierTitles(object):
     def generate_funny(self,amount):
         for v in range(amount):
             try:
-                print(self.begins[random.randint(0,len(self.begins)-1)] + " - " + self.ends[random.randint(0,len(self.ends)-1)])
+                print(self.begins[random.randint(0,len(self.begins)-1)] + " – " + self.ends[random.randint(0,len(self.ends)-1)])
             except Exception as error:
                 print(error)
                 print("Fail at  " + str(v))
