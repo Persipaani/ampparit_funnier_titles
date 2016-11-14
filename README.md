@@ -20,4 +20,4 @@ Results of this application might be (random generated):
 
 
 # Known bugs:
-* Some times ampparit don't give html file at first try
+* Sometimes ampparit don't give html file at first try
