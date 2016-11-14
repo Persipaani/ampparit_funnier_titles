@@ -3,7 +3,7 @@
 Retrieves the most popular titles from Ampparit.com and mixes them together
 to form funny titles. Doesn't use API because Ampparit.com doesn't have one to my
 knowledge. May sometimes get confused with some weird titles because I can't predict
-what journalist come up next ;)
+what journalists come up next ;)
 
 Usage: If you have Python just run main.py, use pre started command line since the app just closes after it's done
 
