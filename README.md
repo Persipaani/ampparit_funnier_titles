@@ -5,7 +5,9 @@ to form funny titles. Doesn't use API because Ampparit.com doesn't have one to m
 knowledge. May sometimes get confused with some weird titles because I can't predict
 what journalists come up next ;)
 
-Usage: If you have Python just run main.py, use pre started command line since the app just closes after it's done
+Usage:
+
+If you have Python just run src/main.py, use existing command line since the app just closes after it's done.
 
 Example:
 
@@ -20,4 +22,4 @@ Results of this application might be (random generated):
 
 
 # Known bugs:
-* Sometimes ampparit don't give html file at first try
+* Sometimes Ampparit doesn't give a html file at first try
